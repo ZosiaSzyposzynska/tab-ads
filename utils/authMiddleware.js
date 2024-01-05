@@ -1,5 +1,4 @@
-const Session = require('../models/session.model');
-const User = require('../models/usermodel');
+const Session = require('../models/Session.model');
 const authMiddleware = async (req, res, next) => {
 
   if (process.env.NODE_ENV !== "production") {
@@ -8,6 +7,8 @@ const authMiddleware = async (req, res, next) => {
 
       // find last session record in db
       const sessionRecord = await Session.findOne({});
+
+      console.log(sessionRecord);
 
       // if session is not found
       // return 401 status and message
@@ -20,6 +21,8 @@ const authMiddleware = async (req, res, next) => {
         id: sessionData.user.id,
         login: sessionData.user.login,
       }
+
+      console.log(req.session.user);
 
       next();
     }

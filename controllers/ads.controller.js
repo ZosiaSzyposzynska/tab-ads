@@ -1,8 +1,7 @@
 const Ad = require('../models/admodel');
-const user = require('../models/usermodel');
 
-const AdsController = {
-  getAll: async (req, res) => {
+
+  exports.getAll = async (req, res) => {
     try {
       const ads = await Ad.find().populate('user');
       res.json(ads);
@@ -11,7 +10,7 @@ const AdsController = {
     }
   },
 
-  getById: async (req, res) => {
+  exports.getById = async (req, res) => {
     try {
       const ad = await Ad.findById(req.params.id).populate('user');
       if (ad) {
@@ -24,7 +23,7 @@ const AdsController = {
     }
   },
 
-  addNewAd: async (req, res) => {
+  exports.addNewAd = async (req, res) => {
     const ad = new Ad(req.body);
     try {
       const newAd = await ad.save();
@@ -34,7 +33,7 @@ const AdsController = {
     }
   },
 
-  updateAd: async (req, res) => {
+  exports.updateAd = async (req, res) => {
     try {
       const updatedAd = await Ad.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -45,7 +44,7 @@ const AdsController = {
     }
   },
 
-  deleteAd: async (req, res) => {
+  exports.deleteAd = async (req, res) => {
     try {
       await Ad.findByIdAndDelete(req.params.id);
       res.json({ message: 'Ad deleted successfully' });
@@ -54,7 +53,7 @@ const AdsController = {
     }
   },
 
- searchAdsByTitle: async (req, res) => {
+ exports.searchAdsByTitle =  async (req, res) => {
   try {
     const searchPhrase = req.params.searchPhrase;
     const matchingAds = await Ad.find({ title: { $regex: searchPhrase}});
@@ -62,8 +61,5 @@ const AdsController = {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
 };
 
-
-module.exports = AdsController;
