@@ -35,6 +35,7 @@ app.use(
 
 
 app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api', adsRoutes);
 app.use('/auth', authRoutes);
 
