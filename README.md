@@ -1,6 +1,6 @@
 # ADS BOARD 
 ## Simple backend app - ads board
-##Technologies
+## Technologies
 * Prisma
 * Express
 * MongoDB
